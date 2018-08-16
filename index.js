@@ -7,6 +7,8 @@ var fs = require('fs');
 var handlers = require('./lib/handlers');
 var helpers = require('./lib/helpers');
 
+
+
 var httpsServerOptions = {
     'key': fs.readFileSync('./https/key.pem'),
     'cert': fs.readFileSync('./https/cert.pem')
@@ -14,6 +16,10 @@ var httpsServerOptions = {
 
 var httpsServer = https.createServer(httpsServerOptions, function(req, res) {
     unifiedServer(req, res);
+});
+
+helpers.sendTwilioSms('4158375309','hello',function(err){
+    console.log('this was the error ', err);
 });
 
 var httpServer = http.createServer(function(req, res) {
